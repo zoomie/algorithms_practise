@@ -21,7 +21,7 @@ func rotLeft(a []int, d int) []int {
 	return a
 }
 
-func main() {
+func main_old() {
 	var a = []int{1, 2, 3, 4, 5}
 	var d int = 3
 	a = rotLeft(a, d)
