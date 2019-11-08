@@ -1,53 +1,72 @@
-// package main
+package main
 
-// import (
-// 	"sync"
-// )
+import "fmt"
 
-// type Node struct {
-// 	key   int
-// 	value string
-// 	left  *Node //left
-// 	right *Node //right
-// }
+type Node struct {
+	key   int
+	value string
+	left  *Node
+	right *Node
+}
+type BST struct {
+	root *Node
+}
 
-// type ItemBinarySearchTree struct {
-// 	root *Node
-// 	lock sync.RWMutex
-// }
+func (b *BST) addData(key int, value string) {
+	newNode := &Node{key: key, value: value}
+	if b.root == nil {
+		b.root = newNode
+	} else {
+		addNode(b.root, newNode)
+	}
+}
 
-// func main() {
-// 	var t ItemBinarySearchTree
-// 	t.addKey(1, "string")
-// 	t.addKey(2, "string")
-// 	t.addKey(0, "string")
-// 	t.addKey(3, "string")
-// 	t.addKey(5, "string")
-// 	t.addKey(7, "string")
-// 	t.addKey(9, "string")
-// }
+func (b *BST) getData(key int) string {
+	if b.root == nil {
+		return "none"
+	} else {
+		return getNodeValue(b.root, key)
+	}
+}
+func getNodeValue(node *Node, key int) string {
+	if node.key == key {
+		return node.value
+	} else if node.key > key {
+		if node.right == nil {
+			return "No value"
+		} else {
+			return getNodeValue(node.right, key)
+		}
+	} else {
+		if node.left == nil {
+			return "No value"
+		} else {
+			return getNodeValue(node.left, key)
+		}
+	}
+}
 
-// func (bst *ItemBinarySearchTree) addKey(key int, value string) {
-// 	newNode := &Node{key, value, nil, nil}
-// 	if bst.root == nil {
-// 		bst.root = newNode
-// 	} else {
-// 		appendNode(bst.root, newNode)
-// 	}
-// }
+func addNode(parentNode, newNode *Node) {
+	if parentNode.key > newNode.key {
+		if parentNode.right == nil {
+			parentNode.right = newNode
+		} else {
+			addNode(parentNode.right, newNode)
+		}
+	} else if parentNode.key < newNode.key {
+		if parentNode.left == nil {
+			parentNode.left = newNode
+		} else {
+			addNode(parentNode.right, newNode)
+		}
+	} else {
+		parentNode = newNode
+	}
+}
 
-// func appendNode(parent, child *Node) {
-// 	if parent.key > child.key {
-// 		if parent.left == nil {
-// 			parent.left = child
-// 		} else {
-// 			appendNode(parent.left, child)
-// 		}
-// 	} else {
-// 		if parent.right == nil {
-// 			parent.right = child
-// 		} else {
-// 			appendNode(parent.right, child)
-// 		}
-// 	}
-// }
+func main() {
+	b := BST{}
+	b.addData(1, "value")
+	b.addData(3, "Test input string")
+	fmt.Println(b.getData(4))
+}
