@@ -1,7 +1,14 @@
-(defn get-permutations [full-set]
-    (if (= 1 (count full-set))
-      full-set
-      (for [subset full-set]
-        (disj full-set subset))))
+(defn get-perms [full-set]
+    (-> (for [val full-set]
+          (let [perms (disj full-set val)]
+            (if (= 1 (count perms))
+              perms
+              (get-perms perms))))
+      (conj full-set)
+      (flatten)))
   
-  (get-permutations #{1 2 4})
+  (defn get-permutations [full-set]
+    (set (get-perms full-set)))
+  
+  (get-permutations #{1 2 3 4 5})
+  
