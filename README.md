@@ -1,1 +1,1 @@
-Add tests to interesting algs
+This repo is a collection of algorithms.
