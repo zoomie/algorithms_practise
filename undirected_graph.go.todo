@@ -1,0 +1,55 @@
+// package main
+
+// import "fmt"
+
+// type node struct {
+// 	value int
+// }
+// type graph struct {
+// 	nodes       []*node
+// 	connections map[node][]*node
+// }
+
+// func (g *graph) addNode(n *node) {
+// 	g.nodes = append(g.nodes, n)
+// }
+
+// func (g *graph) connect(n1, n2 *node) {
+// 	if g.connections == nil {
+// 		g.connections = make(map[node][]*node)
+// 	}
+// 	g.connections[*n1] = append(g.connections[*n1], n2)
+// 	g.connections[*n2] = append(g.connections[*n2], n1)
+// }
+
+// func (g *graph) isConnected(n1, n2 *node) bool {
+// 	visited := make(map[node]bool)
+// 	visit(g, n1, visited)
+// 	_, ok := visited[*n2]
+// 	if ok {
+// 		return true
+// 	} else {
+// 		return false
+// 	}
+// }
+
+// func visit(g *graph, n *node, visited map[node]bool) {
+// 	visited[*n] = true
+// 	for i := 0; i < len(g.connections[*n]); i++ {
+// 		newNode := g.connections[i]
+// 		_, ok := visited[newNode]
+// 	}
+// }
+
+// func main1() {
+// 	g := graph{}
+// 	n1 := &node{value: 1}
+// 	n2 := &node{value: 2}
+// 	n3 := &node{value: 3}
+// 	g.addNode(n1)
+// 	g.addNode(n2)
+// 	g.addNode(n3)
+// 	g.connect(n1, n2)
+// 	g.connect(n1, n3)
+// 	fmt.Println(g.isConnected(n1, n2))
+// }
