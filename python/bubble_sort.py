@@ -13,3 +13,5 @@ def sort(arr):
 
 arr = [randint(1, 100) for _ in range(20)]
 print(sort(arr))
+
+# at it's worst, this will have an O(n^2)
